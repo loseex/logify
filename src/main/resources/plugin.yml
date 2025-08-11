@@ -1,0 +1,7 @@
+name: logify
+version: '1.0-SNAPSHOT'
+main: github.loseex.logify.Plugin
+api-version: '1.21'
+authors: [ loseex ]
+description: Minecraft plugin for authentication via Telegram
+website: https://github.com/loseex/logify
