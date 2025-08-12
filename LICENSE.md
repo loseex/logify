@@ -1,7 +1,7 @@
 MIT License
 
-Copyright (c) 2025 Dmitry Chekhanadskikh
-Contact: t.me/loseex
+Copyright (c) 2025 Dmitry Chekhanadskikh\
+Contact: https://t.me/loseex
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
