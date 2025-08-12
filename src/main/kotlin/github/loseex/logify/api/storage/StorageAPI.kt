@@ -54,5 +54,5 @@ interface StorageAPI {
    *         or remaining time until expiration
    * @throws NoSuchElementException if key doesn't exist
    */
-  fun ttl(key: String): Duration
+  fun ttl(key: String): Duration?
 }
