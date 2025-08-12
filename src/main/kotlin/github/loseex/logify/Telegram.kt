@@ -45,8 +45,6 @@ class Telegram : TelegramAPI {
     this.retrieveSecret()
     this.initialize(this.secret)
 
-
-
     this.job = this.application.buildBehaviourWithLongPolling(CoroutineScope(Dispatchers.Default)) {
       this@Telegram.context = this
 
