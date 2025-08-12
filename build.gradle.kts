@@ -18,6 +18,7 @@ dependencies {
   compileOnly("org.spigotmc:spigot-api:1.21.8-R0.1-SNAPSHOT")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
   implementation("dev.inmo:tgbotapi:28.0.0")
+  implementation("com.google.code.gson:gson:2.13.1")
 }
 
 tasks {
