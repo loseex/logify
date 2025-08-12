@@ -22,8 +22,8 @@ class Storage : StorageAPI {
     if (ttl.isNegative) throw RuntimeException("TTL must be non-negative")
     val expiration = convert(ttl)
 
-    this.store.put(key, value)
-    this.expired.put(key, expiration)
+    this.store[key] = value
+    this.expired[key] = expiration
 
     scheduleCleanupIfNeeded()
   }
@@ -51,7 +51,7 @@ class Storage : StorageAPI {
 
   override fun expire(key: String, ttl: Duration) {
     if (!this.store.containsKey(key)) return
-    this.expired.put(key, this.convert(ttl))
+    this.expired[key] = this.convert(ttl)
     scheduleCleanupIfNeeded()
   }
 
@@ -90,9 +90,7 @@ class Storage : StorageAPI {
 
       val iterator = this.expired.entries.iterator()
       while (iterator.hasNext() && count < CLEANUP_BATCH_SIZE) {
-        val entry = iterator.next()
-        val key = entry.key
-        val expiration = entry.value
+        val (key, expiration) = iterator.next()
         if (expiration <= currentTime) {
           iterator.remove()
           this.store.remove(key)
