@@ -55,4 +55,20 @@ interface StorageAPI {
    * @throws NoSuchElementException if key doesn't exist
    */
   fun ttl(key: String): Duration?
+
+  /**
+   * Determines if a key has expired by comparing against current or specified time.
+   *
+   * @param key The key to check for expiration status
+   * @param time Optional timestamp (in milliseconds) to use for expiration check.
+   *             Defaults to current system time if not specified.
+   * @return true if the key exists with an active TTL and has expired,
+   *         false if key doesn't exist, has no TTL, or TTL hasn't elapsed.
+   *         Note: Returns false for non-existent keys (consistent with exists() behavior)
+   *
+   * @see exists
+   * @see ttl
+   * @see System.currentTimeMillis
+   */
+  fun isExpired(key: String, time: Long = System.currentTimeMillis()): Boolean
 }

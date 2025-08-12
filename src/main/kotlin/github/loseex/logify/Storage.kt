@@ -65,9 +65,9 @@ class Storage : StorageAPI {
     return Duration.ofMillis(expiration - currentTime)
   }
 
-  private fun isExpired(key: String, currentTime: Long = System.currentTimeMillis()): Boolean {
+  override fun isExpired(key: String, time: Long): Boolean {
     val expiration = this.expired[key] ?: return true
-    return currentTime >= expiration
+    return time >= expiration
   }
 
   private fun scheduleCleanupIfNeeded() {
