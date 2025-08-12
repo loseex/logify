@@ -2,31 +2,31 @@ package github.loseex.logify.api.telegram
 
 interface TelegramAPI {
   /**
-   * Initializes and starts the Telegram bot instance.
+   * Initializes and starts the Telegram bot with long-polling.
    *
-   * This method should:
-   * - Load bot configuration from plugin settings
-   * - Authenticate with Telegram using the bot token
-   * - Register command handlers for Minecraft-related actions
-   * - Set up webhook or long-polling connection
-   * - Begin listening for Telegram messages
+   * This asynchronous method:
+   * - Retrieves bot token from plugin configuration
+   * - Initializes Telegram bot API client
+   * - Starts long-polling connection in background
+   * - Sets up behaviour context for message handling
    *
-   * @throws PluginConfigurationException if bot token or settings are invalid
-   * @throws TelegramConnectionException if connection to Telegram servers fails
+   * Runs in coroutine scope with IO dispatcher.
+   *
+   * @throws RuntimeException if bot token is not configured
+   * @throws Exception for any Telegram API connection errors
    */
   fun inject(): Unit
 
   /**
-   * Safely stops the Telegram bot integration.
+   * Gracefully shuts down the Telegram bot connection.
    *
-   * This method should:
-   * - Disconnect from Telegram servers gracefully
-   * - Save any pending notifications or logs
-   * - Release resources to prevent memory leaks
-   * - Unregister all Minecraft event listeners
+   * This method:
+   * - Closes the behaviour context
+   * - Cancels the polling job
+   * - Releases Telegram API resources
+   * - Handles multiple calls safely (idempotent)
    *
-   * Designed to be called during plugin disable/reload.
-   * Multiple calls should be handled safely.
+   * Logs completion status or any errors encountered.
    */
   fun shutdown(): Unit
 }
